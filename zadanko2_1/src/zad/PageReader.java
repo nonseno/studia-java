@@ -13,10 +13,12 @@ public class PageReader {
     public String linia;
     public BufferedReader bfr;
     private int Lines,Brackets, EmptyLines;
+    private String file;
 
     PageReader() {
         fr = null;
         linia = "";
+        file="tekst.txt";
         Lines=0;
         Brackets=0;
         EmptyLines=0;
@@ -41,6 +43,9 @@ public class PageReader {
 
     public void read() throws IOException{
         int lines = 0, starter = 0, ender = 0, brackets=0, emptyLines=0;
+
+                    Open(file);
+
             while ((linia = bfr.readLine()) != null) {
                 lines++;
                 if (linia.contains("/*")) {
@@ -65,6 +70,8 @@ public class PageReader {
             }
 
         setVariables(lines,brackets,emptyLines);
+
+        close();
 
     }
 

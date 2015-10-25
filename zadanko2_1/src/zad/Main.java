@@ -10,7 +10,6 @@ public class Main {
         String file="tekst.txt";
         Scanner wejscie = new Scanner(System.in);
        PageReader countLines = new PageReader();
-        countLines.Open(file);
         countLines.read();
         System.out.println("Chcesz policzyc: \n");
         System.out.println("(1)- wszystkie linie w pliku");
@@ -36,6 +35,5 @@ public class Main {
                 System.out.println("Podano zla liczbe.");
                 break;
         }
-        countLines.close();
     }
 }
