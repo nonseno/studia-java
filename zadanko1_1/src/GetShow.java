@@ -8,16 +8,22 @@ import java.util.Scanner;
  */
 public class GetShow {
 
-    public List insert()
+    String numbers;
+
+    public void Insert()
     {
         Scanner In= new Scanner(System.in);
-        String Numbers = In.nextLine();
-        String[] NumbTmp=Numbers.split(",");
-        List list= Arrays.asList(NumbTmp);
+        this.numbers = In.nextLine();
+    }
+
+    public List<String> Split()
+    {
+        String[] NumbTmp=this.numbers.split(",");
+        List<String> list = Arrays.asList(NumbTmp);
         return list;
     }
 
-    public void show(ArrayList<String> List)
+    public void show(List<String> List)
     {
         List.forEach(s-> System.out.println(s));
     }
