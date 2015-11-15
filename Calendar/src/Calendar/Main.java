@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Worker _hlp = new Worker();
         MenuPrinter _ctr= new MenuPrinter();
+        Handler _hand = new Handler(_hlp);
         _hlp.AddFewCategoriesStacks();
         int choice=0;
         while(choice!=8) {
@@ -14,10 +15,10 @@ public class Main {
             switch(choice)
             {
                 case 1:
-                    _hlp.AddCategory();
+                    _hlp.AddCategory(_hand.HandleCategory());
                     break;
                 case 2:
-                    _hlp.AddTask();
+                    _hlp.AddTask(_hand.HandleTask());
                     break;
                 case 3:
                     _ctr.ShowCategories(_hlp);
@@ -26,10 +27,10 @@ public class Main {
                     _ctr.ShowCategoriesPriority(_hlp);
                     break;
                 case 5:
-                    _hlp.DeleteTask();
+                    _hlp.RemoveTask(_hand.HandleRemove());
                     break;
                 case 6:
-                    _hlp.MarkTask();
+                    _hlp.MarkTask(_hand.HandleMark());
                     break;
                 case 7:
                     _ctr.ShowUndoneTasks(_hlp);

@@ -16,13 +16,6 @@ public class Task {
 
     public boolean SetIsDone() {this.IsDone=true; return true;}
 
-    public String getUndoneTasks()
-    {
-        if(this.IsDone==false)
-        {
-            return this.Name;
-        }
-        return "";
-    }
+
 
 }

@@ -41,7 +41,6 @@ public class MyArray <T>{
         if(counter<=0)
         {
             System.out.println("There are no more elements ");
-            System.exit(0);
         }
 
         tab[counter-1]=null;
@@ -66,54 +65,39 @@ public class MyArray <T>{
     //4
     public String toString ()
     {
-        String tmp="";
+        StringBuilder build= new StringBuilder();
 
             for(int i=0; i<size; i++)
             {
                 if(tab[i]!=null) {
-                    tmp = tmp + tab[i] + ",";
+                    build.append(tab[i]);
+                    build.append(",");
                 }
             }
 
-       String tmp1=tmp.substring(0, tmp.length()-1);
-
-        return "["+tmp1+"]";
+        return "["+build.toString().substring(0,build.length()-1)+"]";
     }
 
     //5
     public boolean isEmpty()
     {
-        if(counter==0)
-        {
-            return true;
-        }
-        else
-            return false;
+        return counter==0;
     }
+
 
     //6
-    public int size()
-    {
-        return counter;
-    }
-
-    //7
     public void clear()
     {
-        for(int i=0; i<counter; i++)
-        {
-            tab[i]=null;
-        }
+        tab = new Object[size];
         counter=0;
     }
 
-    //8
+    //7
     public void set(int index, T val)
     {
         if(index>=size)
         {
             System.out.println("Wykroczyles poza zakres pamieci ");
-            System.exit(0);
         }
         tab[index]=val;
     }

@@ -26,13 +26,11 @@ public class Main {
         System.out.println(arr.get(2));
         System.out.println(arr.toString());
         System.out.println(arr2.toString());
-        System.out.println("W tablicy arr2 sa : " + arr2.size()+ " elementy.");
-
 
         arr2.set(1,"cos");
         System.out.println(arr2.toString());
         arr.clear();
-        arr2.clear();
+      //  arr2.clear();
         System.out.println(arr.isEmpty());
         System.out.println(arr2.isEmpty());
 

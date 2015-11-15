@@ -39,25 +39,25 @@ public class MenuPrinter{
     }
 
 
-    public int CategoryAsk(String Ask, Worker hlp)
+    public String CategoryAsk(String Ask, Worker hlp)
     {
         System.out.println(Ask);
         ShowCategories(hlp);
-        int choice=In.nextInt();
+        String choice=In.next();
         return choice;
     }
 
 
-    public int TaskAsk(int choice, String text, Worker hlp)
+    public String TaskAsk(String choice, String text, Worker hlp)
     {
         System.out.println(text);
         //  hlp.Calendar.get(choice-1).Tasks.forEach(s-> System.out.println(s.Name));
-        for(int i=0; i<hlp.Calendar.get(choice-1).Tasks.size(); i++)
+        for(int i=0; i<hlp.Calendar.get(Integer.parseInt(choice)-1).Tasks.size(); i++)
         {
-            System.out.println(i+1+") "+hlp.Calendar.get(choice-1).Tasks.get(i).Name);
+            System.out.println(i+1+") "+hlp.Calendar.get(Integer.parseInt(choice)-1).Tasks.get(i).Name);
         }
-        int indexOfRemoval =In.nextInt();
-        return indexOfRemoval-1;
+        String indexOfRemoval =In.next();
+        return indexOfRemoval;
 
     }
     
@@ -99,7 +99,17 @@ public class MenuPrinter{
     public void ShowUndoneTasks(Worker hlp)
     {
         System.out.println("Oto wszystkie zadania, ktore jeszcze nie zostaly wykonane: ");
-        hlp.Calendar.forEach(s->s.Tasks.forEach(c-> System.out.println(c.getUndoneTasks())));
+        for(int i=0; i<hlp.Calendar.size(); i++)
+        {
+            for(int j=0; j<hlp.Calendar.get(i).Tasks.size(); j++)
+            {
+                if(!(hlp.Calendar.get(i).Tasks.get(j).IsDone))
+                {
+                    Task tmp=hlp.getUndoneTasks(i,j);
+                    System.out.println(tmp.Name);
+                }
+            }
+        }
     }
 
     private void Sleep()
