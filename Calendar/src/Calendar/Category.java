@@ -1,7 +1,6 @@
 package Calendar;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by Admin on 24.10.15.

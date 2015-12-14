@@ -4,32 +4,33 @@ package Calendar;
  * Created by Admin on 15.11.15.
  */
 public class Handler {
-    MenuPrinter ctr= new MenuPrinter();
-    String[] temp ;
-    Worker work;
+    MenuPrinter MenuPrinter;
+    String[] ArrayHandler ;
+    Worker Worker;
 
-    public Handler(Worker work)
+    public Handler(Worker Worker)
     {
-        temp = new String[2];
-        this.work=work;
+        MenuPrinter = new MenuPrinter();
+        ArrayHandler = new String[2];
+        this.Worker=Worker;
     }
 
 
     public Category HandleCategory() throws Exception {
-        temp[0]=ctr.QuestionString("Podaj nazwe nowej kategori: ");
-        temp[1]=ctr.QuestionString("Podaj priorytet kategori (URGENT,NORMAL,LOW): ");
-        temp[1]=temp[1].toLowerCase();
-        if(temp[1].matches(Priority.URGENT.name().toLowerCase()))
+        ArrayHandler[0]=MenuPrinter.QuestionString("Podaj nazwe nowej kategori: ");
+        ArrayHandler[1]=MenuPrinter.QuestionString("Podaj priorytet kategori (URGENT,NORMAL,LOW): ");
+        ArrayHandler[1]=ArrayHandler[1].toLowerCase();
+        if(ArrayHandler[1].matches(Priority.URGENT.name().toLowerCase()))
         {
-            return new Category(temp[0],Priority.URGENT);
+            return new Category(ArrayHandler[0],Priority.URGENT);
         }
-        else if(temp[1].matches(Priority.NORMAL.name().toLowerCase()))
+        else if(ArrayHandler[1].matches(Priority.NORMAL.name().toLowerCase()))
         {
-            return new Category(temp[0],Priority.NORMAL);
+            return new Category(ArrayHandler[0],Priority.NORMAL);
         }
-        else if(temp[1].matches(Priority.LOW.name().toLowerCase()))
+        else if(ArrayHandler[1].matches(Priority.LOW.name().toLowerCase()))
         {
-            return new Category(temp[0],Priority.LOW);
+            return new Category(ArrayHandler[0],Priority.LOW);
         }
         else
         {
@@ -38,27 +39,23 @@ public class Handler {
     }
 
     public String[] HandleTask() {
-        temp[0]=ctr.CategoryAsk("Do ktorej kategori chcesz dodac zadanie? Podaj numer: ", work);
-        temp[1]=ctr.QuestionString("Podaj nazwe zadania: ");
-        return temp;
+        ArrayHandler[0]=MenuPrinter.CategoryAsk("Do ktorej kategori chcesz dodac zadanie? Podaj numer: ", Worker);
+        ArrayHandler[1]=MenuPrinter.QuestionString("Podaj nazwe zadania: ");
+        return ArrayHandler;
     }
 
     public String[] HandleRemove() {
-        temp[0]=ctr.CategoryAsk("Z ktorej kategori chcesz usunac zadanie? Podaj numer: ",work);
-        temp[1]=ctr.TaskAsk(temp[0],"Ktore zadanie chcesz usunac? Podaj numer: ", work);
-        return temp;
+        ArrayHandler[0]=MenuPrinter.CategoryAsk("Z ktorej kategori chcesz usunac zadanie? Podaj numer: ",Worker);
+        ArrayHandler[1]=MenuPrinter.TaskAsk(ArrayHandler[0],"Ktore zadanie chcesz usunac? Podaj numer: ", Worker);
+        return ArrayHandler;
     }
 
     public String[] HandleMark() throws Exception
     {
-        temp[0]=ctr.CategoryAsk("Z ktorej kategori chcesz oznaczyc zadanie jako wykonane? Podaj numer: ",work);
-        work.CheckIfTask(temp[0]);
-        temp[1]=ctr.TaskAsk(temp[0],"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",work);
-        return temp;
+        ArrayHandler[0]=MenuPrinter.CategoryAsk("Z ktorej kategori chcesz oznaczyc zadanie jako wykonane? Podaj numer: ",Worker);
+        Worker.CheckIfThereAreUndoneTasks(ArrayHandler[0]);
+        ArrayHandler[1]=MenuPrinter.TaskAsk(ArrayHandler[0],"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",Worker);
+        return ArrayHandler;
     }
-
-
-
-
 
 }

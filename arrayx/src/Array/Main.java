@@ -1,16 +1,11 @@
 package Array;
 
 
-import java.util.ArrayList;
-
 /**
  * Created by Admin on 22.10.15.
  */
 public class Main {
-    public static void main(String[] args) {
-
-        ArrayList<Integer> lista = new ArrayList<Integer>();
-//        lista.
+    public static void main(String[] args) throws Exception {
 
         MyArray<Integer> arr = new MyArray<Integer>();
         MyArray<String> arr2 = new MyArray<String>();

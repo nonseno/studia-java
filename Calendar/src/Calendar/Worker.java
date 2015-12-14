@@ -2,39 +2,39 @@ package Calendar;
 
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by Admin on 24.10.15.
  */
 public class Worker{
-    public ArrayList<Category> Calendar;
+    public static ArrayList<Category> Calendar = new ArrayList<>();
 
-
-    public Worker()
-    {
-        Calendar= new ArrayList<>();
+    static {
+        Calendar.add(new Category("za tydzien",Priority.URGENT));
+        Calendar.add(new Category("na jutro",Priority.NORMAL));
+        Calendar.add(new Category("na piatek",Priority.LOW));
+        Calendar.get(0).Tasks.add(new Task("arytmetyka"));
+        Calendar.get(0).Tasks.add(new Task("wizyta u lekarza"));
+        Calendar.get(2).Tasks.add(new Task("sprawozdzanie z luca"));
+        Calendar.get(0).Tasks.add(new Task("oplata za kredyt"));
     }
-
-
 
     public void AddCategory(Category cat) throws Exception {
         Calendar.add(cat);
     }
 
-    public void AddTask(String[] tab) {
-        System.out.println(tab[0] +","+ tab[1]);
-        Calendar.get(Integer.parseInt(tab[0])-1).Tasks.add(new Task(tab[1]));
+    public void AddTask(String[] ArrayHandler) {
+        Calendar.get(Integer.parseInt(ArrayHandler[0])-1).Tasks.add(new Task(ArrayHandler[1]));
     }
 
 
-    public void RemoveTask(String[] tab) {
-        Calendar.get(Integer.parseInt(tab[0])-1).Tasks.remove(Integer.parseInt(tab[1]) - 1);
+    public void RemoveTask(String[] ArrayHandler) {
+        Calendar.get(Integer.parseInt(ArrayHandler[0])-1).Tasks.remove(Integer.parseInt(ArrayHandler[1]) - 1);
     }
 
-    public void MarkTask(String[] tab) throws Exception
+    public void MarkTask(String[] ArrayHandler) throws Exception
     {
-        if(Calendar.get(Integer.parseInt(tab[0])-1).Tasks.get(Integer.parseInt(tab[1])).SetIsDone()==false)
+        if(Calendar.get(Integer.parseInt(ArrayHandler[0])-1).Tasks.get(Integer.parseInt(ArrayHandler[1])-1).SetIsDone()==false)
             throw new Exception("Nie mozna bylo oznaczyc zadania jako wykonanego");
     }
 
@@ -44,7 +44,7 @@ public class Worker{
     }
 
 
-    public void CheckIfTask(String choic) throws Exception
+    public void CheckIfThereAreUndoneTasks(String choic) throws Exception
     {
         int choice=Integer.parseInt(choic);
         if(Calendar.get(choice-1).Tasks.isEmpty())
@@ -57,19 +57,6 @@ public class Worker{
         }
         if(j==0)
             throw new Exception("Wszystkie zadania zostaly juz wykonane");
-
-    }
-
-
-    public void AddFewCategoriesStacks()
-    {
-        Calendar.add(new Category("za tydzien",Priority.URGENT));
-        Calendar.add(new Category("na jutro",Priority.NORMAL));
-        Calendar.add(new Category("na piatek",Priority.LOW));
-        Calendar.get(0).Tasks.add(new Task("arytmetyka"));
-        Calendar.get(0).Tasks.add(new Task("wizyta u lekarza"));
-        Calendar.get(2).Tasks.add(new Task("sprawozdzanie z luca"));
-        Calendar.get(0).Tasks.add(new Task("oplata za kredyt"));
     }
 
 }

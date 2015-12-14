@@ -34,7 +34,7 @@ public class MenuPrinter{
     public String QuestionString(String quest)
     {
         System.out.println(quest);
-        String tmp=In.next();
+        String tmp=In.nextLine();
         return tmp;
     }
 
@@ -43,7 +43,7 @@ public class MenuPrinter{
     {
         System.out.println(Ask);
         ShowCategories(hlp);
-        String choice=In.next();
+        String choice=In.nextLine();
         return choice;
     }
 
@@ -51,7 +51,6 @@ public class MenuPrinter{
     public String TaskAsk(String choice, String text, Worker hlp)
     {
         System.out.println(text);
-        //  hlp.Calendar.get(choice-1).Tasks.forEach(s-> System.out.println(s.Name));
         for(int i=0; i<hlp.Calendar.get(Integer.parseInt(choice)-1).Tasks.size(); i++)
         {
             System.out.println(i+1+") "+hlp.Calendar.get(Integer.parseInt(choice)-1).Tasks.get(i).Name);

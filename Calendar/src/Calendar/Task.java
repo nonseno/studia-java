@@ -16,6 +16,4 @@ public class Task {
 
     public boolean SetIsDone() {this.IsDone=true; return true;}
 
-
-
 }

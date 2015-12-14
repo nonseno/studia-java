@@ -17,11 +17,7 @@ public class MyArray <T>{
         tab = new Object[size];
     }
 
-    public MyArray(int initial)
-    {
-        this.size=initial;
-        tab = new Object[initial];
-    }
+
 
     //1
     public void add(T item)
@@ -36,11 +32,10 @@ public class MyArray <T>{
     }
 
 //2
-    public T remove()
-    {
+    public T remove() throws Exception {
         if(counter<=0)
         {
-            System.out.println("There are no more elements ");
+            throw new Exception("There are no more elements ");
         }
 
         tab[counter-1]=null;
@@ -93,11 +88,10 @@ public class MyArray <T>{
     }
 
     //7
-    public void set(int index, T val)
-    {
+    public void set(int index, T val) throws Exception {
         if(index>=size)
         {
-            System.out.println("Wykroczyles poza zakres pamieci ");
+            throw new Exception("Wykroczyles poza zakres pamieci ");
         }
         tab[index]=val;
     }
