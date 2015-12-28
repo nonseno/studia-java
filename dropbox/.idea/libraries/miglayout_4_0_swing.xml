@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="miglayout-4.0-swing">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/miglayout-4.0-swing.jar!/" />
+      <root url="jar://$USER_HOME$/.IntelliJIdea14/system/jars/mockito-all-1.9.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.IntelliJIdea14/system/jars/mockito-all-1.9.5.jar!/" />
+    </SOURCES>
+  </library>
+</component>
