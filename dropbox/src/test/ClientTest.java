@@ -6,10 +6,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import service.Client;
 
-import java.io.IOException;
-
-import static junit.framework.TestCase.assertTrue;
-
 /**
  * Created by Admin on 27.12.15.
  */

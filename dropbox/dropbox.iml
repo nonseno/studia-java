@@ -37,5 +37,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="dropbox-core-sdk-1.8.2" level="project" />
+    <orderEntry type="library" name="mockito-all-1.9.5" level="project" />
+    <orderEntry type="library" name="jackson-core-2.6.1" level="project" />
   </component>
 </module>
