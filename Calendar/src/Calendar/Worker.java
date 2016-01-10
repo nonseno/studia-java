@@ -8,48 +8,40 @@ import java.util.ArrayList;
  */
 public class Worker{
     private  ArrayList<Category> calendar = new ArrayList<>();
-    MenuPrinter menuPrinter = new MenuPrinter();
 
-    public int getSize()
-    {
-        return calendar.size();
-    }
+
 
     public ArrayList<Category> getCalendar() {
         return calendar;
     }
 
-    public void addCategory() throws Exception {
-        String categoryName=menuPrinter.questionString("Podaj nazwe nowej kategori: ");
-        String categoryPriority=menuPrinter.questionString("Podaj priorytet kategori (URGENT,NORMAL,LOW): ");
-        categoryPriority=categoryPriority.toLowerCase();
-        calendar.add(new Category(categoryName,Priority.valueOf(categoryPriority)));
+    public void addCategory(Category category) throws Exception {
+        calendar.add(category);
     }
 
-    public void addTask() {
-        int categoryPosition = menuPrinter.categoryAsk("Do ktorej kategori chcesz dodac zadanie? Podaj numer: ",this);
-        String taskName=menuPrinter.questionString("Podaj nazwe zadania: ");
-       calendar.get(categoryPosition).addTask(new Task(taskName));
+    public void addTask(Handler handler) {
+        calendar.get(handler.getCategoryPosition()).addTask(new Task(handler.getTaskName()));
     }
 
 
-    public void removeTask() {
-        int categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz usunac zadanie? Podaj numer: ",this);
-        int taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz usunac? Podaj numer: ", this);
-        calendar.get(categoryPosition).removeTask(taskPosition);
+    public void removeTask(Handler handler) {
+        calendar.get(handler.getCategoryPosition()).removeTask(handler.getTaskPosition());
     }
 
-    public void markTask() throws Exception
+    public void markTask(Handler handler) throws Exception
     {
-        int categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz oznaczyc zadanie jako wykonane? Podaj numer: ",this);
-        int taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",this);
-        if(!(calendar.get(categoryPosition).getTask(taskPosition).setIsDone()))
+     if(!(calendar.get(handler.getCategoryPosition()).getTask(handler.getTaskPosition()).setIsDone()))
             throw new Exception("Nie mozna bylo oznaczyc zadania jako wykonanego");
     }
 
     public Task getDoneTasks(int i, int j)
     {
         return calendar.get(i).getTask(j);
+    }
+
+    public int getSize()
+    {
+        return calendar.size();
     }
 
 

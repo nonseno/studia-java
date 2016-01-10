@@ -7,16 +7,17 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Worker worker = new Worker();
         MenuPrinter menuPrinter= new MenuPrinter();
+        Handler handler = new Handler(worker);
         int choice=0;
         while(choice!=8) {
             choice=menuPrinter.ShowMenu();
             switch(choice)
             {
                 case 1:
-                    worker.addCategory();
+                    worker.addCategory(handler.HandleCategory());
                     break;
                 case 2:
-                    worker.addTask();
+                    worker.addTask(handler.HandleTask());
                     break;
                 case 3:
                     menuPrinter.ShowCategories(worker);
@@ -25,10 +26,10 @@ public class Main {
                     menuPrinter.ShowCategoriesPriority(worker);
                     break;
                 case 5:
-                    worker.removeTask();
+                    worker.removeTask(handler.HandleRemove());
                     break;
                 case 6:
-                    worker.markTask();
+                    worker.markTask(handler.HandleMark());
                     break;
                 case 7:
                     menuPrinter.showUndoneTasks(worker);
