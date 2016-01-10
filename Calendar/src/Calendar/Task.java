@@ -4,8 +4,8 @@ package Calendar;
  * Created by Admin on 24.10.15.
  */
 public class Task {
-    public String name;
-    public boolean isDone;
+    private String name;
+    private boolean isDone;
 
 
     public Task(String name)
@@ -14,6 +14,14 @@ public class Task {
         this.isDone=false;
     }
 
-    public boolean SetIsDone() {this.isDone=true; return true;}
+    public String getName() {
+        return name;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public boolean setIsDone() {this.isDone=true; return true;}
 
 }

@@ -5,34 +5,33 @@ package Calendar;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        Worker _wrk = new Worker();
-        MenuPrinter _prt= new MenuPrinter();
-        Handler _hand = new Handler(_wrk);
+        Worker worker = new Worker();
+        MenuPrinter menuPrinter= new MenuPrinter();
         int choice=0;
         while(choice!=8) {
-            choice=_prt.ShowMenu();
+            choice=menuPrinter.ShowMenu();
             switch(choice)
             {
                 case 1:
-                    _wrk.AddCategory(_hand.HandleCategory());
+                    worker.addCategory();
                     break;
                 case 2:
-                    _wrk.AddTask(_hand.HandleTask());
+                    worker.addTask();
                     break;
                 case 3:
-                    _prt.ShowCategories(_wrk);
+                    menuPrinter.ShowCategories(worker);
                     break;
                 case 4:
-                    _prt.ShowCategoriesPriority(_wrk);
+                    menuPrinter.ShowCategoriesPriority(worker);
                     break;
                 case 5:
-                    _wrk.RemoveTask(_hand.HandleRemove());
+                    worker.removeTask();
                     break;
                 case 6:
-                    _wrk.MarkTask(_hand.HandleMark());
+                    worker.markTask();
                     break;
                 case 7:
-                    _prt.ShowUndoneTasks(_wrk);
+                    menuPrinter.showUndoneTasks(worker);
                     break;
                 default:
                     System.exit(0);

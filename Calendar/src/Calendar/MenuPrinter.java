@@ -31,7 +31,7 @@ public class MenuPrinter{
     }
 
 
-    public String QuestionString(String quest)
+    public String questionString(String quest)
     {
         System.out.println(quest);
         String tmp=in.nextLine();
@@ -39,21 +39,21 @@ public class MenuPrinter{
     }
 
 
-    public int CategoryAsk(String Ask, Worker hlp)
+    public int categoryAsk(String Ask, Worker worker)
     {
         System.out.println(Ask);
-        ShowCategories(hlp);
+        ShowCategories(worker);
         int choice=in.nextInt();
         return choice;
     }
 
 
-    public int TaskAsk(int choice, String text, Worker hlp)
+    public int taskAsk(int choice, String text, Worker worker)
     {
         System.out.println(text);
-        for(int i=0; i<hlp.Calendar.get(choice-1).tasks.size(); i++)
+        for(int i=0; i<worker.getCalendar().get(choice-1).getSize(); i++)
         {
-            System.out.println(i+1+") "+hlp.Calendar.get(choice-1).tasks.get(i).name);
+            System.out.println(i+1+") "+worker.getCalendar().get(choice-1).getTask(i).getName());
         }
         int indexOfRemoval =in.nextInt();
         return indexOfRemoval;
@@ -61,32 +61,32 @@ public class MenuPrinter{
     }
     
 
-    public void ShowCategories(Worker hlp)
+    public void ShowCategories(Worker worker)
     {
         System.out.println("Wszystkie kategorie:  \n");
-        for(int i=0; i<hlp.Calendar.size(); i++)
+        for(int i=0; i<worker.getSize(); i++)
         {
-            System.out.println(1+i+") "+hlp.Calendar.get(i).name);
+            System.out.println(1+i+") "+worker.getCalendar().get(i));
         }
         System.out.println("\n\n");
         Sleep();
     }
 
 
-    public void ShowCategoriesPriority(Worker hlp)
+    public void ShowCategoriesPriority(Worker worker)
     {
         System.out.println("Kategorie z ktorego priorytetu chcesz obejrzec (URGENT,NORMAL,LOW): ");
         String prioTemp=in.next();
         prioTemp=prioTemp.toLowerCase();
         System.out.println("Oto wszystkie zadania przydzielone do danych kategori priorytetu "+prioTemp+" :\n");
-        for(int i=0; i<hlp.Calendar.size(); i++)
+        for(int i=0; i<worker.getSize(); i++)
         {
-            if(prioTemp.matches(hlp.Calendar.get(i).pro.name().toLowerCase()))
+            if(prioTemp.matches(worker.getCalendar().get(i).getPro().name().toLowerCase()))
             {
-                System.out.println("Kategoria: "+hlp.Calendar.get(i).name+"\nZadania: ");
-                for(int j=0; j<hlp.Calendar.get(i).tasks.size(); j++)
+                System.out.println("Kategoria: "+worker.getCalendar().get(i)+"\nZadania: ");
+                for(int j=0; j<worker.getCalendar().get(i).getSize(); j++)
                 {
-                    System.out.println(1+j+") "+hlp.Calendar.get(i).tasks.get(j).name);
+                    System.out.println(1+j+") "+worker.getCalendar().get(i).getTask(j).getName());
                 }
 
             }
@@ -95,17 +95,17 @@ public class MenuPrinter{
         Sleep();
     }
 
-    public void ShowUndoneTasks(Worker hlp)
+    public void showUndoneTasks(Worker worker)
     {
         System.out.println("Oto wszystkie zadania, ktore jeszcze nie zostaly wykonane: ");
-        for(int i=0; i<hlp.Calendar.size(); i++)
+        for(int i=0; i<worker.getCalendar().size(); i++)
         {
-            for(int j=0; j<hlp.Calendar.get(i).tasks.size(); j++)
+            for(int j=0; j<worker.getCalendar().get(i).getSize(); j++)
             {
-                if(!(hlp.Calendar.get(i).tasks.get(j).isDone))
+                if(!(worker.getCalendar().get(i).getTask(j).isDone()))
                 {
-                    Task tmp=hlp.getUndoneTasks(i,j);
-                    System.out.println(tmp.name);
+                    Task tmp=worker.getDoneTasks(i,j);
+                    System.out.println(tmp.getName());
                 }
             }
         }

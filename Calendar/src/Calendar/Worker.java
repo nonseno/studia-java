@@ -7,46 +7,50 @@ import java.util.ArrayList;
  * Created by Admin on 24.10.15.
  */
 public class Worker{
-    public  ArrayList<Category> Calendar = new ArrayList<>();
+    private  ArrayList<Category> calendar = new ArrayList<>();
+    MenuPrinter menuPrinter = new MenuPrinter();
 
-
-    public void AddCategory(Category cat) throws Exception {
-        Calendar.add(cat);
-    }
-
-    public void AddTask(Helper helper) {
-        Calendar.get(helper.getCategoryPosition()).tasks.add(new Task(helper.getTaskName()));
-    }
-
-
-    public void RemoveTask(Helper helper) {
-        Calendar.get(helper.getCategoryPosition()).tasks.remove(helper.getTaskPosition());
-    }
-
-    public void MarkTask(Helper helper) throws Exception
+    public int getSize()
     {
-        if(!(Calendar.get(helper.getCategoryPosition()).tasks.get(helper.getTaskPosition()).SetIsDone()))
+        return calendar.size();
+    }
+
+    public ArrayList<Category> getCalendar() {
+        return calendar;
+    }
+
+    public void addCategory() throws Exception {
+        String categoryName=menuPrinter.questionString("Podaj nazwe nowej kategori: ");
+        String categoryPriority=menuPrinter.questionString("Podaj priorytet kategori (URGENT,NORMAL,LOW): ");
+        categoryPriority=categoryPriority.toLowerCase();
+        calendar.add(new Category(categoryName,Priority.valueOf(categoryPriority)));
+    }
+
+    public void addTask() {
+        int categoryPosition = menuPrinter.categoryAsk("Do ktorej kategori chcesz dodac zadanie? Podaj numer: ",this);
+        String taskName=menuPrinter.questionString("Podaj nazwe zadania: ");
+       calendar.get(categoryPosition).addTask(new Task(taskName));
+    }
+
+
+    public void removeTask() {
+        int categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz usunac zadanie? Podaj numer: ",this);
+        int taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz usunac? Podaj numer: ", this);
+        calendar.get(categoryPosition).removeTask(taskPosition);
+    }
+
+    public void markTask() throws Exception
+    {
+        int categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz oznaczyc zadanie jako wykonane? Podaj numer: ",this);
+        int taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",this);
+        if(!(calendar.get(categoryPosition).getTask(taskPosition).setIsDone()))
             throw new Exception("Nie mozna bylo oznaczyc zadania jako wykonanego");
     }
 
-    public Task getUndoneTasks(int i, int j)
+    public Task getDoneTasks(int i, int j)
     {
-        return Calendar.get(i).tasks.get(j);
+        return calendar.get(i).getTask(j);
     }
 
-
-    public void CheckIfThereAreUndoneTasks(int choice) throws Exception
-    {
-        if(Calendar.get(choice-1).tasks.isEmpty())
-            throw new Exception("W kategori nie ma zadnych zadan");
-        int j=0;
-        for(int i=0; i<Calendar.get(choice-1).tasks.size(); i++)
-        {
-            if(!(Calendar.get(choice-1).tasks.get(i).isDone))
-                j++;
-        }
-        if(j==0)
-            throw new Exception("Wszystkie zadania zostaly juz wykonane");
-    }
 
 }
