@@ -5,5 +5,4 @@ package Calendar;
  */
 public enum Priority {
     URGENT, NORMAL, LOW
-
 }

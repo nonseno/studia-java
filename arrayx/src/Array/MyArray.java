@@ -8,13 +8,12 @@ import java.util.Arrays;
  */
 public class MyArray <T>{
     private Object[] tab;
-    private int size=0, counter=0;
+    private int counter=0;
     private T item;
 
     public MyArray()
     {
-        this.size=10;
-        tab = new Object[size];
+        tab = new Object[10];
     }
 
 
@@ -23,9 +22,9 @@ public class MyArray <T>{
     public void add(T item)
     {
         this.item=item;
-        if(counter>=size)
+        if(counter>=tab.length)
         {
-            tab = Arrays.copyOf(tab, size * 2);
+            tab = Arrays.copyOf(tab,2*tab.length);
         }
         tab[counter]=this.item;
         counter++;
@@ -62,7 +61,7 @@ public class MyArray <T>{
     {
         StringBuilder build= new StringBuilder();
 
-            for(int i=0; i<size; i++)
+            for(int i=0; i<tab.length; i++)
             {
                 if(tab[i]!=null) {
                     build.append(tab[i]);
@@ -83,13 +82,14 @@ public class MyArray <T>{
     //6
     public void clear()
     {
+        int size=tab.length;
         tab = new Object[size];
         counter=0;
     }
 
     //7
     public void set(int index, T val) throws Exception {
-        if(index>=size)
+        if(index>=tab.length)
         {
             throw new Exception("Wykroczyles poza zakres pamieci ");
         }

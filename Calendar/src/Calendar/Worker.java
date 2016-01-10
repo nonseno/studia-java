@@ -7,52 +7,42 @@ import java.util.ArrayList;
  * Created by Admin on 24.10.15.
  */
 public class Worker{
-    public static ArrayList<Category> Calendar = new ArrayList<>();
+    public  ArrayList<Category> Calendar = new ArrayList<>();
 
-    static {
-        Calendar.add(new Category("za tydzien",Priority.URGENT));
-        Calendar.add(new Category("na jutro",Priority.NORMAL));
-        Calendar.add(new Category("na piatek",Priority.LOW));
-        Calendar.get(0).Tasks.add(new Task("arytmetyka"));
-        Calendar.get(0).Tasks.add(new Task("wizyta u lekarza"));
-        Calendar.get(2).Tasks.add(new Task("sprawozdzanie z luca"));
-        Calendar.get(0).Tasks.add(new Task("oplata za kredyt"));
-    }
 
     public void AddCategory(Category cat) throws Exception {
         Calendar.add(cat);
     }
 
-    public void AddTask(String[] ArrayHandler) {
-        Calendar.get(Integer.parseInt(ArrayHandler[0])-1).Tasks.add(new Task(ArrayHandler[1]));
+    public void AddTask(Helper helper) {
+        Calendar.get(helper.getCategoryPosition()).tasks.add(new Task(helper.getTaskName()));
     }
 
 
-    public void RemoveTask(String[] ArrayHandler) {
-        Calendar.get(Integer.parseInt(ArrayHandler[0])-1).Tasks.remove(Integer.parseInt(ArrayHandler[1]) - 1);
+    public void RemoveTask(Helper helper) {
+        Calendar.get(helper.getCategoryPosition()).tasks.remove(helper.getTaskPosition());
     }
 
-    public void MarkTask(String[] ArrayHandler) throws Exception
+    public void MarkTask(Helper helper) throws Exception
     {
-        if(Calendar.get(Integer.parseInt(ArrayHandler[0])-1).Tasks.get(Integer.parseInt(ArrayHandler[1])-1).SetIsDone()==false)
+        if(!(Calendar.get(helper.getCategoryPosition()).tasks.get(helper.getTaskPosition()).SetIsDone()))
             throw new Exception("Nie mozna bylo oznaczyc zadania jako wykonanego");
     }
 
     public Task getUndoneTasks(int i, int j)
     {
-        return Calendar.get(i).Tasks.get(j);
+        return Calendar.get(i).tasks.get(j);
     }
 
 
-    public void CheckIfThereAreUndoneTasks(String choic) throws Exception
+    public void CheckIfThereAreUndoneTasks(int choice) throws Exception
     {
-        int choice=Integer.parseInt(choic);
-        if(Calendar.get(choice-1).Tasks.isEmpty())
+        if(Calendar.get(choice-1).tasks.isEmpty())
             throw new Exception("W kategori nie ma zadnych zadan");
         int j=0;
-        for(int i=0; i<Calendar.get(choice-1).Tasks.size(); i++)
+        for(int i=0; i<Calendar.get(choice-1).tasks.size(); i++)
         {
-            if(Calendar.get(choice-1).Tasks.get(i).IsDone==false)
+            if(!(Calendar.get(choice-1).tasks.get(i).isDone))
                 j++;
         }
         if(j==0)

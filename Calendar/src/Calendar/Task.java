@@ -4,16 +4,16 @@ package Calendar;
  * Created by Admin on 24.10.15.
  */
 public class Task {
-    protected String Name;
-    protected boolean IsDone;
+    public String name;
+    public boolean isDone;
 
 
-    public Task(String Name)
+    public Task(String name)
     {
-        this.Name=Name;
-        this.IsDone=false;
+        this.name=name;
+        this.isDone=false;
     }
 
-    public boolean SetIsDone() {this.IsDone=true; return true;}
+    public boolean SetIsDone() {this.isDone=true; return true;}
 
 }

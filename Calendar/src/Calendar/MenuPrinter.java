@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Created by Admin on 29.10.15.
  */
 public class MenuPrinter{
-        Scanner In = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
     public int ShowMenu() throws Exception {
         System.out.println("Wybierz z menu: ");
@@ -20,7 +20,7 @@ public class MenuPrinter{
         System.out.println("7) Pokaz niedokonczone zadania");
         System.out.println("8) Koniec programu\n");
         System.out.println("Podaj numer: ");
-        int tmp=In.nextInt();
+        int tmp=in.nextInt();
         Check(tmp);
         return tmp;
     }
@@ -34,28 +34,28 @@ public class MenuPrinter{
     public String QuestionString(String quest)
     {
         System.out.println(quest);
-        String tmp=In.nextLine();
+        String tmp=in.nextLine();
         return tmp;
     }
 
 
-    public String CategoryAsk(String Ask, Worker hlp)
+    public int CategoryAsk(String Ask, Worker hlp)
     {
         System.out.println(Ask);
         ShowCategories(hlp);
-        String choice=In.nextLine();
+        int choice=in.nextInt();
         return choice;
     }
 
 
-    public String TaskAsk(String choice, String text, Worker hlp)
+    public int TaskAsk(String choice, String text, Worker hlp)
     {
         System.out.println(text);
-        for(int i=0; i<hlp.Calendar.get(Integer.parseInt(choice)-1).Tasks.size(); i++)
+        for(int i=0; i<hlp.Calendar.get(Integer.parseInt(choice)-1).tasks.size(); i++)
         {
-            System.out.println(i+1+") "+hlp.Calendar.get(Integer.parseInt(choice)-1).Tasks.get(i).Name);
+            System.out.println(i+1+") "+hlp.Calendar.get(Integer.parseInt(choice)-1).tasks.get(i).name);
         }
-        String indexOfRemoval =In.next();
+        int indexOfRemoval =in.nextInt();
         return indexOfRemoval;
 
     }
@@ -66,7 +66,7 @@ public class MenuPrinter{
         System.out.println("Wszystkie kategorie:  \n");
         for(int i=0; i<hlp.Calendar.size(); i++)
         {
-            System.out.println(1+i+") "+hlp.Calendar.get(i).Name);
+            System.out.println(1+i+") "+hlp.Calendar.get(i).name);
         }
         System.out.println("\n\n");
         Sleep();
@@ -76,17 +76,17 @@ public class MenuPrinter{
     public void ShowCategoriesPriority(Worker hlp)
     {
         System.out.println("Kategorie z ktorego priorytetu chcesz obejrzec (URGENT,NORMAL,LOW): ");
-        String prioTemp=In.next();
+        String prioTemp=in.next();
         prioTemp=prioTemp.toLowerCase();
         System.out.println("Oto wszystkie zadania przydzielone do danych kategori priorytetu "+prioTemp+" :\n");
         for(int i=0; i<hlp.Calendar.size(); i++)
         {
-            if(prioTemp.matches(hlp.Calendar.get(i).Pro.name().toLowerCase()))
+            if(prioTemp.matches(hlp.Calendar.get(i).pro.name().toLowerCase()))
             {
-                System.out.println("Kategoria: "+hlp.Calendar.get(i).Name+"\nZadania: ");
-                for(int j=0; j<hlp.Calendar.get(i).Tasks.size(); j++)
+                System.out.println("Kategoria: "+hlp.Calendar.get(i).name+"\nZadania: ");
+                for(int j=0; j<hlp.Calendar.get(i).tasks.size(); j++)
                 {
-                    System.out.println(1+j+") "+hlp.Calendar.get(i).Tasks.get(j).Name);
+                    System.out.println(1+j+") "+hlp.Calendar.get(i).tasks.get(j).name);
                 }
 
             }
@@ -100,12 +100,12 @@ public class MenuPrinter{
         System.out.println("Oto wszystkie zadania, ktore jeszcze nie zostaly wykonane: ");
         for(int i=0; i<hlp.Calendar.size(); i++)
         {
-            for(int j=0; j<hlp.Calendar.get(i).Tasks.size(); j++)
+            for(int j=0; j<hlp.Calendar.get(i).tasks.size(); j++)
             {
-                if(!(hlp.Calendar.get(i).Tasks.get(j).IsDone))
+                if(!(hlp.Calendar.get(i).tasks.get(j).isDone))
                 {
                     Task tmp=hlp.getUndoneTasks(i,j);
-                    System.out.println(tmp.Name);
+                    System.out.println(tmp.name);
                 }
             }
         }
