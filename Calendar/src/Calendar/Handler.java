@@ -5,13 +5,11 @@ package Calendar;
  */
 public class Handler {
     MenuPrinter menuPrinter;
-    String[] arrayHandler ;
     Worker worker;
 
     public Handler(Worker worker)
     {
         menuPrinter = new MenuPrinter();
-        arrayHandler = new String[2];
         this.worker=worker;
     }
 
@@ -30,7 +28,7 @@ public class Handler {
 
     public Helper HandleRemove() {
         int categoryPosition=menuPrinter.CategoryAsk("Z ktorej kategori chcesz usunac zadanie? Podaj numer: ",worker);
-        int taskPosition=menuPrinter.TaskAsk(arrayHandler[0],"Ktore zadanie chcesz usunac? Podaj numer: ", worker);
+        int taskPosition=menuPrinter.TaskAsk(categoryPosition,"Ktore zadanie chcesz usunac? Podaj numer: ", worker);
         return new Helper(categoryPosition,taskPosition);
     }
 
@@ -38,7 +36,7 @@ public class Handler {
     {
         int categoryPosition=menuPrinter.CategoryAsk("Z ktorej kategori chcesz oznaczyc zadanie jako wykonane? Podaj numer: ",worker);
         worker.CheckIfThereAreUndoneTasks(categoryPosition);
-        int taskPosition=menuPrinter.TaskAsk(arrayHandler[0],"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",worker);
+        int taskPosition=menuPrinter.TaskAsk(categoryPosition,"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",worker);
         return new Helper(categoryPosition,taskPosition);
     }
 

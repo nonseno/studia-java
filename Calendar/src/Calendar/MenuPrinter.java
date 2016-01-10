@@ -48,12 +48,12 @@ public class MenuPrinter{
     }
 
 
-    public int TaskAsk(String choice, String text, Worker hlp)
+    public int TaskAsk(int choice, String text, Worker hlp)
     {
         System.out.println(text);
-        for(int i=0; i<hlp.Calendar.get(Integer.parseInt(choice)-1).tasks.size(); i++)
+        for(int i=0; i<hlp.Calendar.get(choice-1).tasks.size(); i++)
         {
-            System.out.println(i+1+") "+hlp.Calendar.get(Integer.parseInt(choice)-1).tasks.get(i).name);
+            System.out.println(i+1+") "+hlp.Calendar.get(choice-1).tasks.get(i).name);
         }
         int indexOfRemoval =in.nextInt();
         return indexOfRemoval;
