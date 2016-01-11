@@ -14,10 +14,10 @@ public class Main {
             switch(choice)
             {
                 case 1:
-                    worker.addCategory(handler.HandleCategory());
+                    handler.HandleCategory();
                     break;
                 case 2:
-                    worker.addTask(handler.HandleTask());
+                    handler.HandleTask();
                     break;
                 case 3:
                     menuPrinter.ShowCategories(worker);
@@ -26,10 +26,10 @@ public class Main {
                     menuPrinter.ShowCategoriesPriority(worker);
                     break;
                 case 5:
-                    worker.removeTask(handler.HandleRemove());
+                    handler.HandleRemove();
                     break;
                 case 6:
-                    worker.markTask(handler.HandleMark());
+                    handler.HandleMark();
                     break;
                 case 7:
                     menuPrinter.showUndoneTasks(worker);

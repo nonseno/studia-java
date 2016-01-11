@@ -19,18 +19,18 @@ public class Worker{
         calendar.add(category);
     }
 
-    public void addTask(Handler handler) {
-        calendar.get(handler.getCategoryPosition()).addTask(new Task(handler.getTaskName()));
+    public void addTask(int categoryPosition, String taskName) {
+        calendar.get(categoryPosition).addTask(new Task(taskName));
     }
 
 
-    public void removeTask(Handler handler) {
-        calendar.get(handler.getCategoryPosition()).removeTask(handler.getTaskPosition());
+    public void removeTask(int categoryPosition, int taskPosition) {
+        calendar.get(categoryPosition).removeTask(taskPosition);
     }
 
-    public void markTask(Handler handler) throws Exception
+    public void markTask(int categoryPosition, int taskPosition) throws Exception
     {
-     if(!(calendar.get(handler.getCategoryPosition()).getTask(handler.getTaskPosition()).setIsDone()))
+     if(!(calendar.get(categoryPosition).getTask(taskPosition).setIsDone()))
             throw new Exception("Nie mozna bylo oznaczyc zadania jako wykonanego");
     }
 

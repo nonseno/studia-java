@@ -4,12 +4,8 @@ package Calendar;
  * Created by Admin on 15.11.15.
  */
 public class Handler {
-    MenuPrinter menuPrinter;
-    Worker worker;
-
-    private int categoryPosition;
-    private int taskPosition;
-    private String taskName;
+    private MenuPrinter menuPrinter;
+    private Worker worker;
 
     public Handler(Worker worker)
     {
@@ -17,43 +13,29 @@ public class Handler {
         this.worker=worker;
     }
 
-
-    public Category HandleCategory() throws Exception {
+    public void HandleCategory() throws Exception {
         String categoryName=menuPrinter.questionString("Podaj nazwe nowej kategori: ");
         String categoryPriority=menuPrinter.questionString("Podaj priorytet kategori (URGENT,NORMAL,LOW): ");
         categoryPriority=categoryPriority.toLowerCase();
-        return new Category(categoryName,Priority.valueOf(categoryPriority));
+        worker.addCategory(new Category(categoryName,Priority.valueOf(categoryPriority)));
     }
 
-    public Handler HandleTask() {
-        categoryPosition = menuPrinter.categoryAsk("Do ktorej kategori chcesz dodac zadanie? Podaj numer: ",worker);
-         taskName=menuPrinter.questionString("Podaj nazwe zadania: ");
-        return this;
+    public void HandleTask() {
+       int categoryPosition = menuPrinter.categoryAsk("Do ktorej kategori chcesz dodac zadanie? Podaj numer: ",worker);
+       String taskName=menuPrinter.questionString("Podaj nazwe zadania: ");
+        worker.addTask(categoryPosition,taskName);
     }
 
-    public Handler HandleRemove() {
-        categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz usunac zadanie? Podaj numer: ",worker);
-        taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz usunac? Podaj numer: ", worker);
-        return this;
+    public void HandleRemove() {
+        int categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz usunac zadanie? Podaj numer: ",worker);
+        int taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz usunac? Podaj numer: ", worker);
+        worker.removeTask(categoryPosition,taskPosition);
     }
 
-    public Handler HandleMark() throws Exception
+    public void HandleMark() throws Exception
     {
-        categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz oznaczyc zadanie jako wykonane? Podaj numer: ",worker);
-        taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",worker);
-        return this;
-    }
-
-
-    public int getCategoryPosition() {
-        return categoryPosition;
-    }
-
-    public int getTaskPosition() {
-        return taskPosition;
-    }
-
-    public String getTaskName() {
-        return taskName;
+        int categoryPosition=menuPrinter.categoryAsk("Z ktorej kategori chcesz oznaczyc zadanie jako wykonane? Podaj numer: ",worker);
+        int taskPosition=menuPrinter.taskAsk(categoryPosition,"Ktore zadanie chcesz oznaczyc jako wykonane? Podaj numer: ",worker);
+        worker.markTask(categoryPosition,taskPosition);
     }
 }
