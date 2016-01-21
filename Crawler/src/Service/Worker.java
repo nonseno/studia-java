@@ -1,5 +1,6 @@
 package Service;
 
+import View.Printer;
 import properties.ConfigService;
 import reader.ReaderFactory;
 import javax.swing.*;
@@ -16,12 +17,10 @@ public class Worker{
     private Searcher searcher;
     private ExecutorService pool;
     private Stats stats;
-    private Printer printer;
 
-    public Worker(Printer printer, Stats stats) throws IOException {
-        this.printer= printer;
+    public Worker(Stats stats, Keeper keeper) throws IOException {
         this.stats = stats;
-        keeper = new Keeper();
+        this.keeper = keeper;
         readerFactory = new ReaderFactory();
         pool = Executors.newFixedThreadPool(new ConfigService().getThreadAmount());
     }
@@ -42,10 +41,6 @@ public class Worker{
             readerFactory.setPath(keeper.getExternalLink(keeper.getIdLink()));
             pool.submit(new Searcher(readerFactory.create(),keeper, stats));
             keeper.incrementIdLink();
-            }
-            if((keeper.getSentencesSize()>keeper.getIdSentence()) ) {
-                SwingUtilities.invokeLater(() -> printer.displayString(keeper.getSentence(keeper.getIdSentence())));
-                keeper.incrementIdSentence();
             }
         }
     }

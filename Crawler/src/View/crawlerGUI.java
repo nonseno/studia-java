@@ -1,4 +1,6 @@
-import Service.Printer;
+package View;
+
+import Service.Keeper;
 import Service.Stats;
 import Service.Worker;
 import net.miginfocom.swing.MigLayout;
@@ -43,9 +45,11 @@ public class crawlerGUI extends JFrame {
 
         createUIComponents();
 
-        Printer printer = new Printer(taShowResults,lShowStatsOne,lShowStatsTwo);
-        Stats stats = new Stats(printer);
-        Worker worker = new Worker(printer,stats);
+        Stats stats = new Stats();
+        Keeper keeper = new Keeper();
+        Worker worker = new Worker(stats, keeper);
+        Printer printer = new Printer(worker, keeper, stats, taShowResults,lShowStatsOne,lShowStatsTwo);
+
 
         worker.onStart(askForWord());
         worker.search();
