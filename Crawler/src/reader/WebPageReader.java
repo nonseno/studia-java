@@ -33,17 +33,5 @@ public class WebPageReader implements Reader{
         }
         return sb.toString();
 
-
-
-//        StringBuilder stringBuilder = new StringBuilder();
-//        try (BufferedReader in = new BufferedReader(new InputStreamReader(new URL(path).openStream()))) {
-//            String inputLine;
-//            while ((inputLine = in.readLine()) != null)
-//                stringBuilder.append(inputLine);
-//        } catch (Exception e) {
-//            System.out.println("Can not read URL");
-//            e.printStackTrace();
-//        }
-//        return stringBuilder.toString();
     }
 }

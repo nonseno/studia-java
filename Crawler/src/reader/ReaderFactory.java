@@ -21,11 +21,8 @@ public class ReaderFactory {
 
     public void appendPath(String word) throws UnsupportedEncodingException {
         StringBuilder stringBuilder = new StringBuilder();
-//        path = path + URLEncoder.encode(word, "UTF-8");
         path = stringBuilder.append(path).append(word).toString();
     }
-
-    public String getPath() { return path;}
 
     public  Reader create(){
         return new WebPageReader(path);

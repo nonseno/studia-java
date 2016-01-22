@@ -1,9 +1,7 @@
 package Service;
 
-import View.Printer;
 import properties.ConfigService;
 import reader.ReaderFactory;
-import javax.swing.*;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

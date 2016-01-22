@@ -35,7 +35,7 @@ public class Printer {
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleWithFixedDelay(task,0,1, TimeUnit.SECONDS);
         scheduledExecutorServiceTwo = Executors.newScheduledThreadPool(1);
-        scheduledExecutorServiceTwo.scheduleWithFixedDelay(task2,0,1, TimeUnit.SECONDS);
+        scheduledExecutorServiceTwo.scheduleWithFixedDelay(task2,0,100, TimeUnit.MILLISECONDS);
     }
 
     public void displayString(String sentence){
@@ -54,7 +54,7 @@ public class Printer {
     Runnable task = () -> {
         try{
             TimeUnit.SECONDS.sleep(10);
-            lShowStatsOne.setText("Zebrano : "+ stats.getLinkStats() +"linkow/10s");
+            lShowStatsOne.setText("Zebrano : "+ stats.getLinkStats() +" linkow/10s");
         } catch (InterruptedException e) {
             displayString(e.getMessage());
         }
@@ -62,7 +62,7 @@ public class Printer {
 
     Runnable task2 = () -> {
       displaySentences();
-        lShowStatsTwo.setText("Zebrano : "+ stats.getWordStats() +"slow/strone");
+        lShowStatsTwo.setText("Zebrano : "+ stats.getWordStats() +" slow/strone");
     };
 
 

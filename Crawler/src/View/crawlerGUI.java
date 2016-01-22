@@ -51,7 +51,7 @@ public class crawlerGUI extends JFrame {
         Printer printer = new Printer(worker, keeper, stats, taShowResults,lShowStatsOne,lShowStatsTwo);
 
 
-        worker.onStart(askForWord());
+        worker.onStart(askForWord().toLowerCase());
         worker.start();
 
     }
