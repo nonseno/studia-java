@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by nonseno on 2016-01-13.
  */
-public class Worker{
+public class Worker extends Thread{
     private Keeper keeper;
     private ReaderFactory readerFactory;
     private Searcher searcher;
@@ -35,15 +35,22 @@ public class Worker{
       }
 
     public void search() throws IOException {
-        while(true)
-        {
             if(keeper.getExternalSize()>keeper.getIdLink()){
             readerFactory.setPath(keeper.getExternalLink(keeper.getIdLink()));
             pool.submit(new Searcher(readerFactory.create(),keeper, stats));
             keeper.incrementIdLink();
             }
-        }
     }
 
+
+    public void run()
+    {
+        while(true)
+            try {
+                search();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
 
 }

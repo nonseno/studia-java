@@ -52,7 +52,7 @@ public class crawlerGUI extends JFrame {
 
 
         worker.onStart(askForWord());
-        worker.search();
+        worker.start();
 
     }
 

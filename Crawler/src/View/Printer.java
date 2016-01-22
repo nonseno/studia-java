@@ -23,6 +23,7 @@ public class Printer {
     private JLabel lShowStatsOne;
     private JLabel lShowStatsTwo;
     private ScheduledExecutorService scheduledExecutorService;
+    private ScheduledExecutorService scheduledExecutorServiceTwo;
 
     public Printer( Worker worker, Keeper keeper, Stats stats, JTextArea taShowResults, JLabel lShowStatsOne, JLabel lShowStatsTwo) throws IOException {
         this.worker = worker;
@@ -33,6 +34,8 @@ public class Printer {
         this.lShowStatsTwo = lShowStatsTwo;
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleWithFixedDelay(task,0,1, TimeUnit.SECONDS);
+        scheduledExecutorServiceTwo = Executors.newScheduledThreadPool(1);
+        scheduledExecutorServiceTwo.scheduleWithFixedDelay(task2,0,1, TimeUnit.SECONDS);
     }
 
     public void displayString(String sentence){
@@ -42,7 +45,7 @@ public class Printer {
 
     public void displaySentences(){
         if((keeper.getSentencesSize()>keeper.getIdSentence()) ) {
-            SwingUtilities.invokeLater(() -> taShowResults.append(keeper.getSentence(keeper.getIdSentence())));
+            SwingUtilities.invokeLater(() -> taShowResults.append(keeper.getSentence(keeper.getIdSentence())+"\n"));
             keeper.incrementIdSentence();
         }
     }
@@ -51,12 +54,16 @@ public class Printer {
     Runnable task = () -> {
         try{
             TimeUnit.SECONDS.sleep(10);
-            displaySentences();
             lShowStatsOne.setText("Zebrano : "+ stats.getLinkStats() +"linkow/10s");
-            lShowStatsTwo.setText("Zebrano : "+ stats.getWordStats() +"slow/strone");
         } catch (InterruptedException e) {
             displayString(e.getMessage());
         }
     };
+
+    Runnable task2 = () -> {
+      displaySentences();
+        lShowStatsTwo.setText("Zebrano : "+ stats.getWordStats() +"slow/strone");
+    };
+
 
 }
